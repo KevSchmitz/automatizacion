@@ -1,7 +1,17 @@
-from constants import BASE_DIR,FECHA_HOY
-from certificados_automatizados.main import certificados_automatizados
+from certificados_automatizados.lotes import get_lotes
+from certificados_automatizados.productos import get_productos
+from certificados_automatizados.excel import iniciar_excel, from_excel_to_pdf
+
 
 def main():
-    certificados_automatizados(BASE_DIR, FECHA_HOY)
+    lotes = get_lotes()
+    productos = get_productos(lotes)
+
+    excel = iniciar_excel()
+
+    for producto in productos:
+
+        from_excel_to_pdf(producto, excel)
+
 
 main()
